@@ -1,8 +1,17 @@
-import React, { useState } from 'react';
-import { Container, Form, FormGroup, Label, Input, TextArea, Button } from '../styles/ContactForm.styled';
+import React, { useContext, useState } from 'react';
+import { ContainerLight, ContainerNight, FormLight, FormNight, FormGroup, Label, InputLight, InputNight, TextAreaLight, TextAreaNight, ButtonLight, ButtonNight } from '../styles/ContactForm.styled';
+import ThemeContext from '../context/ThemeContext';
 
 const ContactForm = () => {
     const [form, setForm] = useState({name: "", email: "", message: ""});
+    const themeContext = useContext(ThemeContext);
+
+    const Container = themeContext?.theme === 'night' ? ContainerNight : ContainerLight;
+    const Form = themeContext?.theme === 'night' ? FormNight : FormLight;
+    const Input = themeContext?.theme === 'night' ? InputNight : InputLight;
+    const TextArea = themeContext?.theme === 'night' ? TextAreaNight : TextAreaLight;
+    const Button = themeContext?.theme === 'night' ? ButtonNight : ButtonLight;
+
     const handleChange = (e: React.ChangeEvent<HTMLInputElement|HTMLTextAreaElement>) => {
         const {name, value} = e.target;
         setForm(prevForm => ({...prevForm, [name]:value}));

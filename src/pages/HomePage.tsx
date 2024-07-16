@@ -11,7 +11,7 @@ const HomePage = () => {
             <Header/>      
             <Container>
                 <CompanyInfo/>
-                <h2>Nos sessions d'escape game</h2>
+                <h2 style={{color:"white"}}>Nos sessions d'escape game</h2>
                 <SessionList/>
                 <ContactInfo/>
             </Container>

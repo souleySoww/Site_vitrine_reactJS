@@ -1,17 +1,36 @@
-import React from 'react'
-import {Card} from '../styles/SessionCard.styled'
+import React, { useContext } from 'react'
+import {CardLight, CardNight} from '../styles/SessionCard.styled'
+import { Session } from '../api/server';
+import ThemeContext from '../context/ThemeContext';
 
-type SessionCardProps = {
-    title: String;
-    description: String;
-}
+/*type Session = {
+    id: number;
+    theme: string;
+    duration: number;
+    price: number;
+    minParticipants: number;
+    availableSlots: string[];
+};*/
 
-const SessionCard = ({title, description}: SessionCardProps) => {
+const SessionCard = ({session}: {session: Session}) => {
+    const themeContext = useContext(ThemeContext);
+
+    const CardComponent = themeContext?.theme === 'night' ? CardNight : CardLight;
+    
     return (
-        <Card>
-            <h2>{title}</h2>
-            <p>{description}</p>
-        </Card>
+        <CardComponent>
+            <h2>{session.theme}</h2>
+            <p>Duration: {session.duration} minutes</p>
+            <p>Price: ${session.price}</p>
+            <p>Minimum Participants: {session.minParticipants}</p>
+            <div className="slot-list">
+                {session.availableSlots.map((slot, index) => (
+                <span key={index} className="slot-item">
+                    {slot}
+                </span>
+                ))}
+            </div>
+        </CardComponent>
     )
 }
 export default SessionCard;

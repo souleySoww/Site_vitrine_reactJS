@@ -1,7 +1,12 @@
-import React from "react";
-import { CompanyContainer } from "../styles/CompanyInfo.styled";
+import React, { useContext } from "react";
+import { CompanyContainerLight, CompanyContainerNight } from "../styles/CompanyInfo.styled";
+import ThemeContext from "../context/ThemeContext";
 
 const CompanyInfo = () => {
+    const themeContext = useContext(ThemeContext);
+
+    const CompanyContainer = themeContext?.theme === 'night' ? CompanyContainerNight : CompanyContainerLight;
+    
     return(
         <CompanyContainer>
             <h2>À Propos de La Maison Horrifique</h2>

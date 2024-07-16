@@ -1,8 +1,13 @@
-import React from "react";
-import { ContactContainer } from "../styles/ContactInfo.styled";
+import React, { useContext } from "react";
+import { ContactContainerLight, ContactContainerNight } from "../styles/ContactInfo.styled";
+import ThemeContext from "../context/ThemeContext";
 
 
 const ContactInfo = () => {
+    const themeContext = useContext(ThemeContext);
+
+    const ContactContainer = themeContext?.theme === 'night' ? ContactContainerNight : ContactContainerLight;
+
     return(
         <ContactContainer>
             <h2>Contactez-nous</h2>
